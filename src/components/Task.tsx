@@ -1,5 +1,6 @@
 export interface TaskProps {
   id: number | string;
+  list_id: number | string;
   description: string;
 }
 
