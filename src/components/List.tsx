@@ -3,7 +3,7 @@ import { Task } from "./Task";
 import { TaskProps } from "./Task";
 
 interface ListProps {
-  id: number;
+  id: number | string;
   title: string;
   tasks: TaskProps[];
 }
