@@ -14,8 +14,6 @@ export function App() {
     return <div>Carregando...</div>;
   }
 
-  console.log(data);
-
   return (
     <>
       <header className="flex justify-between px-8 py-4">
