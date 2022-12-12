@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { Task } from "./Task";
 import { TaskProps } from "./Task";
 
+import NewTaskForm from "./NewTaskForm";
 export interface ListProps {
   id: number | string;
   title: string;
@@ -31,14 +32,7 @@ export function List(list: ListProps) {
         ))}
       </ul>
 
-      <form className="my-4 flex gap-2">
-        <input
-          type="text"
-          className="w-full rounded-md border border-slate-400 p-2"
-          placeholder="Nova tarefa"
-        />
-        <button className="rounded-md bg-slate-400 p-2">Adicionar</button>
-      </form>
+      <NewTaskForm listId={list.id} />
     </div>
   );
 }
