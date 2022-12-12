@@ -31,14 +31,14 @@ export function List(list: ListProps) {
         ))}
       </ul>
 
-      <div className="my-4 flex gap-2">
+      <form className="my-4 flex gap-2">
         <input
           type="text"
           className="w-full rounded-md border border-slate-400 p-2"
           placeholder="Nova tarefa"
         />
         <button className="rounded-md bg-slate-400 p-2">Adicionar</button>
-      </div>
+      </form>
     </div>
   );
 }

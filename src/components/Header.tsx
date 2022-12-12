@@ -1,40 +1,39 @@
 import { Dialog } from "@headlessui/react";
 import axios from "axios";
-import { ChangeEvent, FormEvent, useState } from "react";
+
+import { FormEvent, useRef, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+
 import { ListProps } from "./List";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState("");
+  const inputTitleRef = useRef<HTMLInputElement>(null);
+
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation(
-    (newList) => {
+    (newList: ListProps) => {
       return axios.post("http://localhost:3000/lists", newList);
     },
     {
       onSuccess: () => {
         setIsOpen(false);
+
         queryClient.invalidateQueries("lists");
       },
     }
   );
 
-  const queryClient = useQueryClient();
-
   function createNewList(e: FormEvent) {
     e.preventDefault();
 
-    const newList: ListProps = {
+    const newList = {
       id: String(new Date().getTime()),
-      title: title,
+      title: String(inputTitleRef.current?.value),
     };
 
     mutate(newList);
-  }
-
-  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    setTitle(e.target.value);
   }
 
   return (
@@ -62,8 +61,7 @@ export function Header() {
             <div className="mt-4">
               <form className="flex gap-2" onSubmit={createNewList}>
                 <input
-                  onChange={handleInputChange}
-                  value={title}
+                  ref={inputTitleRef}
                   type="text"
                   className="w-full rounded-md border border-slate-400 p-2"
                   placeholder="Digite o título"
