@@ -23,6 +23,7 @@ export default function NewTaskForm({ listId }: ListIdProps) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("tasks");
+        setInputTask("");
       },
     }
   );
@@ -37,7 +38,6 @@ export default function NewTaskForm({ listId }: ListIdProps) {
     };
 
     mutate(newTask);
-    setInputTask("");
   }
 
   return (
